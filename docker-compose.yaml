@@ -1,0 +1,27 @@
+services:
+  website:
+    image: cms_logic
+    build:
+      context: .
+      dockerfile: Dockerfile.cms
+    container_name: cms_logic
+    volumes:
+    - ./logic/wordpress:/wordpress
+    - ./admin/certificates:/certificates
+    - ./admin/.keys:/keys
+    - ./admin/logs:/logs
+    ports:
+    - 8080:80
+    - 8081:443
+    restart: always
+  database:
+    image: cms_db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    container_name: cms_db
+    volumes:
+    - ./db/data:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=to_be_changed_at_first_usage
+    restart: always

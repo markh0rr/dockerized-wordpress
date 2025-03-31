@@ -1,0 +1,30 @@
+FROM alpine:3.19
+
+## expose the ports so that they can automatically be forwarded with -P 
+EXPOSE 80
+EXPOSE 443
+
+## install tools 
+RUN apk update && apk upgrade
+
+## install apache 
+RUN apk add apache2 apache2-utils apache2-dev apache2-ssl
+
+## install php and its dependencies
+RUN apk add php
+RUN apk add php-pdo php-pdo_mysql php-pdo_pgsql php-mysqli
+RUN apk add php-gd
+
+## link php to apache2 
+RUN apk add php-apache2
+
+## apache2 server configuration
+ADD ./logic/config/my_app.conf /etc/apache2/conf.d/my_app.conf
+RUN echo "ServerName my_cms.com" >> /etc/apache2/httpd.conf 
+RUN echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/apache2/httpd.conf 
+
+## entrypoint
+ADD ./logic/config/entrypoint.sh run.sh
+WORKDIR /
+RUN chmod +x run.sh
+ENTRYPOINT [ "./run.sh" ]
