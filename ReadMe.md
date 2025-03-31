@@ -30,9 +30,9 @@ openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -o
 
 Beware that after the first run of the container, the root user is created together with the provided password. To change the password it is not sufficient to change the MYSQL_ROOT_PASSWORD variable. 
 
-8. Run wordpress:
+5. Run wordpress:
 ```
-docker-compose up --build
+make run
 ```
 
 ## Create the website 
@@ -51,16 +51,8 @@ docker ps
 docker exec -it <container_id> sh 
 ```
 
-Remove the network:
-```
-docker network rm cms_network
-```
-
-Troubleshoot database status from cms logic container. 
+Troubleshoot the database from within the cms logic container. 
 ```
 apk add mysql-client
 mysql -u root -p -h cms_db
 ```
-
-
-
