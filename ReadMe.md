@@ -1,28 +1,31 @@
 # Wordpress quickstart 
 
-A volatile docker-based environment for Wordpress. 
-
-Wordpress Quickstart, it is a preconfigured contenerized LAMP stack with folder storage persistence. 
+Wordpress Quickstart, it is a preconfigured contenerized LAMP stack configured to run wordpress with folder storage persistence. 
 
 ## Steps 
 
-0. Create the folder architecture in the cloned folder:
+0. Clone the repository:
+```
+git clone git@github.com:markh0rr/dockerized-wordpress.git
+```
+
+1. Create the folder architecture in the cloned folder:
 ```
 mkdir -p admin/certificates
 mkdir -p admin/.keys
 mkdir -p admin/logs
 ```
 
-1. Download the wordpress zip from [wordpress.org/download](https://fr.wordpress.org/download/).
+2. Download the wordpress software as a zip from [wordpress.org/download](https://fr.wordpress.org/download/).
 
-2. Unzip it and store the resulting folder in the logic folder `logic/` as a folder named `wordpress`.
+3. Unzip it and store the resulting folder in the logic folder `logic/` as a folder named `wordpress`.
 
-3. Create a public key:
+4. Create a public key:
 ```
 ssh-keygen -t rsa -m PEM -b 4096 -C "wordpress_cms" -f ./admin/.keys/cms.key -N ""
 ```
 
-4. Create self signed ssl certificates:
+5. Create self signed ssl certificates:
 ```
 openssl req -new -key admin/.keys/cms.key -out admin/certificates/crm.csr
 openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -out admin/certificates/cms.crt -days 365
@@ -30,7 +33,7 @@ openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -o
 
 Beware that after the first run of the container, the root user is created together with the provided password. To change the password it is not sufficient to change the MYSQL_ROOT_PASSWORD variable. 
 
-5. In the wordpress folder, find and set it to ture: 
+6. In the wordpress folder, find and set it to true: 
 ```
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);
@@ -39,12 +42,12 @@ define('WP_DEBUG_DISPLAY', false);
 
 Logs are now visible in `wp-content/debug.log`.
 
-6. Run wordpress:
+7. Run wordpress:
 ```
 make run
 ```
 
-## Create the website 
+## Access the website and administration pannel
 
 On the first access to `http://localhost:8080`, wordpress configures the website and asks to create a root user with password. 
 
@@ -52,7 +55,7 @@ The website is visible on wordpress `http://localhost:8080`.
 
 The admin pannel is available at `http://localhost:8080/wp-admin`.
 
-## Annexe 
+## Annex
 
 Shell into docker: 
 ```
