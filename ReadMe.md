@@ -33,8 +33,8 @@ openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -o
 
 Beware that after the first run of the container, the root user is created together with the provided password. To change the password it is not sufficient to change the MYSQL_ROOT_PASSWORD variable. 
 
-6. In the wordpress folder, find and set it to true: 
-```
+6. In the wordpress folder at `logic/wordpress/wp-config.php`, append / modify those line: 
+```php
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);
 define('WP_DEBUG_DISPLAY', false);
@@ -49,11 +49,11 @@ make run
 
 ## Access the website and administration pannel
 
-On the first access to `http://localhost:8080`, wordpress configures the website and asks to create a root user with password. 
+On the first access to the website, wordpress initiates the website and asks to create the admin account.
 
-The website is visible on wordpress `http://localhost:8080`.
+The website is visible on wordpress [localhost:8080](http://localhost:8080).
 
-The admin pannel is available at `http://localhost:8080/wp-admin`.
+The admin pannel is available at [localhost:8080/wp-admin](http://localhost:8080/wp-admin).
 
 ## Annex
 
