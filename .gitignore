@@ -1,0 +1,5 @@
+.DS_Store
+secrets.txt
+admin/
+db/data/
+logic/wordpress/

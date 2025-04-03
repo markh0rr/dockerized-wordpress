@@ -30,7 +30,16 @@ openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -o
 
 Beware that after the first run of the container, the root user is created together with the provided password. To change the password it is not sufficient to change the MYSQL_ROOT_PASSWORD variable. 
 
-5. Run wordpress:
+5. In the wordpress folder, find and set it to ture: 
+```
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);
+```
+
+Logs are now visible in `wp-content/debug.log`.
+
+6. Run wordpress:
 ```
 make run
 ```

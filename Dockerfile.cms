@@ -14,6 +14,8 @@ RUN apk add apache2 apache2-utils apache2-dev apache2-ssl
 RUN apk add php
 RUN apk add php-pdo php-pdo_mysql php-pdo_pgsql php-mysqli
 RUN apk add php-gd
+RUN apk add php-xmlreader
+RUN apk add curl php-curl
 
 ## link php to apache2 
 RUN apk add php-apache2
