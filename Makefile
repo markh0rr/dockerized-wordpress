@@ -4,6 +4,15 @@ run:
 build:
 	@docker-compose build
 
+clean:
+	@docker-compose down
+
+reset:
+	@docker-compose down
+	@rm -rf ./db/data
+	@rm -rf ./logic/wordpress
+	@cp -r ../wp_software/wordpress ./logic
+
 sh:
 	@docker ps
 	@{ \

@@ -33,14 +33,7 @@ openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -o
 
 Beware that after the first run of the container, the root user is created together with the provided password. To change the password it is not sufficient to change the MYSQL_ROOT_PASSWORD variable. 
 
-6. In the wordpress folder at `logic/wordpress/wp-config.php`, append / modify those line: 
-```php
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false);
-```
-
-Logs are now visible in `wp-content/debug.log`.
+6. Add the content of `./debug/wp-config.php` to `logic/wordpress/wp-config.php`. This enables the error logs to be visible in `wp-content/debug.log`.
 
 7. Run wordpress:
 ```

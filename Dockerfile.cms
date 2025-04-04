@@ -15,7 +15,10 @@ RUN apk add php
 RUN apk add php-pdo php-pdo_mysql php-pdo_pgsql php-mysqli
 RUN apk add php-gd
 RUN apk add php-xmlreader
+RUN apk add php-ctype
 RUN apk add curl php-curl
+RUN apk add php-zip 
+RUN apk add php-dom
 
 ## link php to apache2 
 RUN apk add php-apache2
