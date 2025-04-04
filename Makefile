@@ -12,6 +12,7 @@ reset:
 	@rm -rf ./db/data
 	@rm -rf ./logic/wordpress
 	@cp -r ../wp_software/wordpress ./logic
+	@cp ./debug/wp-config.php ./logic/wordpress
 
 sh:
 	@docker ps
