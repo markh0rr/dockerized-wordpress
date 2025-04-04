@@ -11,14 +11,42 @@ RUN apk update && apk upgrade
 RUN apk add apache2 apache2-utils apache2-dev apache2-ssl
 
 ## install php and its dependencies
-RUN apk add php
+RUN apk add php php-ffi
+
+    ### databases
+RUN apk add php-pdo_sqlite
+RUN apk add php-sqlite3
 RUN apk add php-pdo php-pdo_mysql php-pdo_pgsql php-mysqli
+
+    ### communication and local
+RUN apk add php-imap
+RUN apk add php-gettext
+
+    ### image and file handling
+RUN apk add php-bz2
+RUN apk add php-exif
+RUN apk add php-fileinfo
 RUN apk add php-gd
-RUN apk add php-xmlreader
-RUN apk add php-ctype
-RUN apk add curl php-curl
-RUN apk add php-zip 
+RUN apk add php-tidy
+RUN apk add php-zip
+
+    ### xml and structured data parsing
+RUN apk add php-xmlreader php-simplexml
 RUN apk add php-dom
+RUN apk add php-xsl
+
+    ### string handling
+RUN apk add php-ctype   
+RUN apk add php-mbstring
+
+    ### security and encryption
+RUN apk add php-sodium
+RUN apk add php-openssl
+
+    ### networking and file transfer
+RUN apk add curl php-curl
+RUN apk add php-soap
+RUN apk add php-ftp
 
 ## link php to apache2 
 RUN apk add php-apache2
