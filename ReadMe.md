@@ -4,38 +4,41 @@ Wordpress Quickstart, it is a preconfigured contenerized LAMP stack configured t
 
 ## Steps 
 
-0. Clone the repository:
+1. Clone the repository:
 ```
 git clone git@github.com:markh0rr/dockerized-wordpress.git
 ```
 
-1. Create the folder architecture in the cloned folder:
+2. Setup the project:
 ```
-mkdir -p admin/certificates
-mkdir -p admin/.keys
-mkdir -p admin/logs
+make setup
 ```
 
-2. Download the wordpress software as a zip from [wordpress.org/download](https://fr.wordpress.org/download/).
+<details>
+<summary>What is done underneat</summary>
 
-3. Unzip it and store the resulting folder in the logic folder `logic/` as a folder named `wordpress`.
+1. Download the wordpress software as a zip from [wordpress.org/download](https://fr.wordpress.org/download/).
 
-4. Create a public key:
+2. Unzips the wordpress zip and store the resulting folder in the logic folder `logic/` as a folder named `wordpress`.
+
+
+3. Creates a public key:
 ```
 ssh-keygen -t rsa -m PEM -b 4096 -C "wordpress_cms" -f ./admin/.keys/cms.key -N ""
 ```
 
-5. Create self signed ssl certificates:
+4. Create self signed ssl certificates:
 ```
 openssl req -new -key admin/.keys/cms.key -out admin/certificates/crm.csr
 openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -out admin/certificates/cms.crt -days 365
 ```
 
-Beware that after the first run of the container, the root user is created together with the provided password. To change the password it is not sufficient to change the MYSQL_ROOT_PASSWORD variable. 
+5. Adds the content of `./debug/wp-config.php` to `logic/wordpress/wp-config.php`. This enables the error logs to be visible in `wp-content/debug.log`.
+</details>
 
-6. Add the content of `./debug/wp-config.php` to `logic/wordpress/wp-config.php`. This enables the error logs to be visible in `wp-content/debug.log`.
+<br/>
 
-7. Run wordpress:
+3. Run wordpress:
 ```
 make run
 ```
