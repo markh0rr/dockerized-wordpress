@@ -1,3 +1,12 @@
+setup:
+	@wget https://wordpress.org/latest.zip
+	@unzip latest.zip && rm latest.zip
+	@mv wordpress logic/wordpress
+	@cp debug/wp-config.php logic/wordpress/wp-config.php
+	@ssh-keygen -t rsa -m PEM -b 4096 -C "wordpress_cms" -f admin/.keys/cms.key -N ""
+	@openssl req -new -key admin/.keys/cms.key -out admin/certificates/crm.csr  -subj "/C=FR/ST=Region/L=City/O=Organization/OU=Department/CN=Domain name"
+	@openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -out admin/certificates/cms.crt -days 365
+
 run:
 	@docker-compose up --build
 	
