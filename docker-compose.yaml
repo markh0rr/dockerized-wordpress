@@ -11,8 +11,8 @@ services:
     - ./admin/.keys:/keys
     - ./admin/logs:/logs
     ports:
-    - 8080:80
-    - 8081:443
+    - "127.0.0.1:8080:80"
+    - "127.0.0.1:8081:443"
     restart: always
   database:
     image: cms_db
