@@ -38,7 +38,12 @@ openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -o
 
 <br/>
 
-3. Run wordpress:
+3. Build The containers
+```
+make build
+```
+
+4. Run wordpress:
 ```
 make run
 ```
