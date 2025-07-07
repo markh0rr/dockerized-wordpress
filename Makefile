@@ -8,7 +8,7 @@ setup:
 	@openssl x509 -req -in admin/certificates/crm.csr -signkey admin/.keys/cms.key -out admin/certificates/cms.crt -days 365
 
 run:
-	@docker-compose up --build
+	@docker-compose up
 	
 build:
 	@docker-compose build
